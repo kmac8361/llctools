@@ -1,0 +1,61 @@
+# Directory List alias
+#alias ll='ls -l'
+#alias la='ls -A'
+#alias l='ls -CF'
+
+alias llchost='python3.6 /srv/python-libmaas/llc_hostlookup.py'
+alias llcip='python3.6 /srv/python-libmaas/llc_iplookup.py'
+alias llcmodel='python3.6 /srv/python-libmaas/llc_modelmap.py'
+
+# GIT alias
+alias gita='git add'
+alias gitb='git branch'
+alias gitc='git commit -m "Master branch updates"'
+alias gitcfg='git config --global --edit'
+alias gitd='git diff'
+alias gitco='git checkout'
+alias gitl='git log'
+alias gitm='git merge'
+alias gitp='git pull'
+alias gitr='git rm'
+alias gits='git status'
+alias gitpush='git push origin master'
+alias gitclean='git clean -d -f -x'
+# git fetch
+# git diff <local branch>  <remote>/<remote branch>
+
+# Bash functions
+myedit() { emacs -geometry 130x45-30-30 $1 & }
+
+# Unix shortcuts
+alias a='alias'
+alias c='clear'
+alias disks='lsblk'
+alias dird='diff --brief -Nr'
+alias sd='source ~/bin/sd'
+alias ed=myedit
+alias g='. ~/bin/gollc'
+alias h='history 50'
+alias j='jobs -l'
+alias lsrls='lsb_release -a'
+alias manp='man -w'
+alias piddump='ps -Flww -p'
+alias xt='xterm -cr white -ms yellow -rw -si -sb -sl 2000 -fn 9x15 -bg slategrey -fg white -geometry 80x40 &'
+alias xb='x-www-browser &'
+alias myps='ps -ef | grep $USER | grep -v grep | grep -v ssh | grep -v xterm | grep -v bash'
+alias mydu='du -h -s --threshold=1G'
+alias clrbash='cat /dev/null > ~/.bash_history'
+alias clrhist='history -c'
+alias rptoff='xset r off'
+alias sb='source /home/ubuntu/.bash_aliases'
+
+alias smtpchk='netstat -A inet,inet6 --listening | grep -i smtp'
+    
+# LLC
+alias llcsql='/usr/bin/mysql -u llcuser --password=llcuser_123 llc_automation'
+
+alias sctlfail='systemctl list-units --state=failed --no-legend'
+alias dpqs='dpkg-query -s'
+alias dpql='dpkg-query -l'
+alias dpqL='dpkg-query -L'
+
