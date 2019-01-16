@@ -6,13 +6,19 @@ client = login(
     username="admin", password="admin",
 )
 
-if (len(sys.argv) < 2):
-    print("usage: llchost hostname")
+matchAll = False
+if (len(sys.argv) > 2):
+    print("usage: llchost [hostname]")
     exit(1)
-hostName = sys.argv[1]
+elif (len(sys.argv) == 2):
+    hostName = sys.argv[1]
+    hostName = hostName.lower()
+else:
+    matchAll = True
 
 for machine in client.machines.list():
-    if hostName.lower() == machine.hostname.lower() :    
+    if (matchAll == True) or (machine.hostname.lower().find(hostName) != -1) :    
+        print("----------------------------------------")
         print("Hostname:   ",machine.hostname)
         print("IPAddress:  ",machine.ip_addresses)
         print("Status:     ",machine.status_name)
