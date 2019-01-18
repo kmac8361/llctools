@@ -33,7 +33,7 @@ for machine in client.machines.list():
         print("HWE Kernel: ",machine.hwe_kernel)
         print("SystemId:   ",machine.system_id)
         powerParams = machine.get_power_parameters()
-        print("PowerAddr: ", powerParams['power_address'])
+        print("PowerAddr:  ", powerParams['power_address'])
         print("PowerState: ",machine.power_state)
         print("PowerType:  ",machine.power_type)
         print("Zone: ",machine.zone)
