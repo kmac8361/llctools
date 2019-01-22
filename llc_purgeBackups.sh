@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Starting llc_purgeBackups...."
+echo "\n****  $(date '+%Y-%m-%d %H:%M:%S') - Starting llc_purgeBackups.... ****"
 
 for subdir in maas juju
 do
@@ -33,6 +33,6 @@ do
     du -h $BCKROOT
 done
 
-echo "Exiting llc_purgeBackups...."
+echo "**** $(date '+%Y-%m-%d %H:%M:%S') - Exiting llc_purgeBackups.... ****"
 exit 0
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Starting llc_maasBackup...."
+echo "\n****  $(date '+%Y-%m-%d %H:%M:%S') - Starting llc_maasBackup....  ****"
 
 BCKROOT=/var/backups/maas
 mkdir -p $BCKROOT
@@ -29,6 +29,6 @@ sudo tar -cvpzf maas_backup_$(date "+%Y%m%d_%H%M%S").tgz /etc/maas /var/lib/maas
 
 sudo rm -f postgres.sql
 
-echo "Completed llc_maasBackup...."
+echo "**** $(date '+%Y-%m-%d %H:%M:%S') - Completed llc_maasBackup.  ****"
 
 exit 0

@@ -1,44 +1,41 @@
 #!/bin/bash
-echo "Starting llc_jujuBackup...."
+echo "\n****  $(date '+%Y-%m-%d %H:%M:%S') - Starting llc_jujuBackup....  ****"
 
 BCKROOT=/var/backups/juju
-mkdir -p $BCKROOT
 if [[ ! -d $BCKROOT ]]
 then
     echo "ERROR: Backup dir <${BCKROOT}> does not exist, exiting..."
     exit 1
 fi
 
-cd /home/ubuntu
+cd $BCKROOT
 rc=$?
 if [[ $rc != 0 ]]
 then
-    echo "ERROR: Could not change dir to ubuntu home. exiting..."
+    echo "ERROR: Could not change dir to ${BCKROOT}. exiting..."
     exit 1
 fi
 
 echo "Starting juju client backup...."
 clientBackup="juju_client_backup_$(date '+%Y%m%d_%H%M%S').tgz"
-sudo -u ubuntu tar -cvpzf $clientBackup /home/ubuntu/.local/share/juju
-sudo mv $clientBackup $BCKROOT
+tar -cvpzf $clientBackup /home/ubuntu/.local/share/juju
 echo "Completed juju client backup...."
 
 echo "Starting juju controller backup...."
-activeModel=`sudo -u ubuntu juju show-model | awk '{print $1 $2}' | grep 'short-name' | cut -c 12-`
-sudo -u ubuntu juju switch controller
+activeModel=`juju show-model | awk '{print $1 $2}' | grep 'short-name' | cut -c 12-`
+juju switch controller
 ctrllrBackup="juju_ctrller_backup_$(date '+%Y%m%d_%H%M%S').tgz"
-sudo -u ubuntu juju create-backup --filename=$ctrllrBackup
-sudo mv $ctrllrBackup $BCKROOT
+juju create-backup --filename=$ctrllrBackup
 
 if [[ "$activeModel" != "" ]]
 then
-    sudo -u ubuntu juju switch $activeModel
+    juju switch $activeModel
 else
-    sudo -u ubuntu juju switch default
+    juju switch default
 fi
 
 echo "Completed juju controller backup...."
 
-echo "Completed llc_jujuBackup...."
+echo "**** $(date '+%Y-%m-%d %H:%M:%S') - Completed llc_jujuBackup.  ****"
 
 exit 0
