@@ -104,7 +104,11 @@ services:
     charm: cs:~containers/kubernetes-worker-138
     constraints: cores=4 mem=4G
     expose: true
-    num_units: 2
+EOF
+
+echo "    num_units: ${numWorkers}" >> k8s-${tenant}/k8s-${tenant}.yaml
+
+cat >>k8s-${tenant}/k8s-${tenant}.yaml <<-EOF
     options:
       channel: 1.11/stable
       allow-privileged: "true"
@@ -142,12 +146,15 @@ relations:
 - - flannel:cni
   - kubernetes-worker:cni
 machines:
+  "0":
+    series: xenial
+    constraints: arch=amd64 tags=mymachinetag-master
 EOF
 
 for i in $(seq 1 ${numWorkers}); do
     echo "  \"$i\":" >> k8s-${tenant}/k8s-${tenant}.yaml
     echo "    series: xenial" >> k8s-${tenant}/k8s-${tenant}.yaml
-    echo "    constraints: arch=amd64 tags=virtualmed" >> k8s-${tenant}/k8s-${tenant}.yaml
+    echo "    constraints: arch=amd64 tags=mymachinetag-worker" >> k8s-${tenant}/k8s-${tenant}.yaml
 done
 
 echo "Completed generation of deployment scripts in subdir k8s-${tenant} ..."
