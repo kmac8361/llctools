@@ -64,7 +64,7 @@ services:
     annotations:
       gui-x: '800'
       gui-y: '550'
-    charm: cs:~containers/etcd-96
+    charm: cs:~containers/etcd-378
     options:
       channel: 3.2/stable
     num_units: 1
