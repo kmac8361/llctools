@@ -1,0 +1,7 @@
+#!/bin/bash
+#logfile=/tmp/fwall.out.$$
+curl -GET -k -u "Ag+NLBrT4BMFPkw+eJC5DVFM9GNbGDdcYwf1zVsr46hT0LzT0PZmIal45onQMWQ1ytqcdlA18a9eT3BC":"2a5neblvpwBZvOhgQ2J31kwV93GelVAizLZZktFKAbP0/h+kCENQfsH3tUygEaBNqCz7H/k5OEZDu/k4"  http://172.27.101.254:8443/api/diagnostics/firewall/log | jq -j '.[] | .interface, ",", .dir, ",", .__timestamp__, ",", .src,":",.srcport, ",", .dst,":",.dstport, ",", .protoname, ",", .label, "\n"' | column -t -s ","
+#curl -GET -k -u "Ag+NLBrT4BMFPkw+eJC5DVFM9GNbGDdcYwf1zVsr46hT0LzT0PZmIal45onQMWQ1ytqcdlA18a9eT3BC":"2a5neblvpwBZvOhgQ2J31kwV93GelVAizLZZktFKAbP0/h+kCENQfsH3tUygEaBNqCz7H/k5OEZDu/k4"  http://172.27.101.254:8443/api/diagnostics/firewall/log | jq -j --arg ifname igb0 --arg ifname2 igb0_vlan169 '.[] | select(.interface==$ifname or .interface==$ifname2) | .interface, ",", .dir, ",", .__timestamp__, ",", .src,":",.srcport, ",", .dst,":",.dstport, ",", .protoname, ",", .label, "\n"' | column -t -s ","
+
+
+
