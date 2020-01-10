@@ -159,10 +159,10 @@ echo -e "\n*** Virsh Listing ***"
 virsh list --all
 
 echo -e "\n*** Cron Listing ***"
+echo -e "\nubuntu crontab..."
+crontab -l | grep -v '^#'
 echo "root crontab..."
 sudo crontab -l -u root | grep -v '^#'
-echo -e "\nubuntu crontab..."
-sudo crontab -l -u ubuntu | grep -v '^#'
 
 echo -e "\n*** MaaS Machine State Listing ***"
 python3.6 /srv/python-libmaas/llc_hostlookup.py
