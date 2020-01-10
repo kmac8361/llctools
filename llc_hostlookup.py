@@ -1,9 +1,20 @@
 from maas.client import login
 import sys
+import socket
+
+llcHostname = socket.gethostname()
+if (not llcHostname):
+    print("ERROR: Unable to get local LLC hostname.")
+    exit(1)
+
+#print("Local hostname: ",llcHostname)
+llcNumber = llcHostname[9:]
+#print("LLC Number: ",llcNumber)
+maasPwd = "maas" + llcNumber
 
 client = login(
     "http://localhost:5240/MAAS/",
-    username="admin", password="admin",
+    username="admin", password=maasPwd,
 )
 
 matchAll = False
