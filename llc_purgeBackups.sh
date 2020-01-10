@@ -25,9 +25,9 @@ do
 
     echo "$(date '+%Y-%m-%d %H:%M:%S'). Purging older backups is starting"
 
-    # Remove backup archives files older then 3 days 
-    find . -maxdepth 1 -type f -name "${subdir}*backup*20*" -mtime +4 -exec ls -ld {} \;
-    find . -maxdepth 1 -type f -name "${subdir}*backup*20*" -mtime +4 -exec rm -fr {} \;
+    # Remove backup archives files older then 2 days 
+    find . -maxdepth 1 -type f -name "${subdir}*backup*20*" -mtime +2 -exec ls -ld {} \;
+    find . -maxdepth 1 -type f -name "${subdir}*backup*20*" -mtime +2 -exec rm -fr {} \;
     
     echo "Disk space in ${BCKROOT} after cleanup:"
     du -h $BCKROOT

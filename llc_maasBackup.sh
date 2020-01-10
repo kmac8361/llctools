@@ -25,9 +25,24 @@ then
     exit 1
 fi
 
-sudo tar -cvpzf maas_backup_$(date "+%Y%m%d_%H%M%S").tgz /etc/maas /var/lib/maas/maas-proxy.conf /var/lib/maas/dhcpd.conf /srv/mec /srv/llctools /srv/smicro-config postgres.sql 
+MAASBACKUP=maas_backup_$(date "+%Y%m%d_%H%M%S").tgz
+sudo tar -cvpzf $MAASBACKUP /etc/maas /var/lib/maas/maas-proxy.conf /var/lib/maas/dhcpd.conf /srv/mec /srv/llctools /srv/smicro-config postgres.sql 
 
 sudo rm -f postgres.sql
+
+DAYNUM=$(date "+%d")
+if [[ "$DAYNUM" == "01" ]]
+then
+    echo "INFO: Saving MAAS monthly backup..."
+    cp $MAASBACKUP ${BCKROOT}/monthly
+
+    cd ${BCKROOT}/monthly
+
+    echo "INFO: Find and remove monthly MAAS backups older than 45 days..."
+    # Remove backup archives files older then 45 days 
+    find . -maxdepth 1 -type f -name "maas*backup*20*" -mtime +45 -exec ls -ld {} \;
+    find . -maxdepth 1 -type f -name "maas*backup*20*" -mtime +45 -exec rm -fr {} \;
+fi
 
 echo "**** $(date '+%Y-%m-%d %H:%M:%S') - Completed llc_maasBackup.  ****"
 

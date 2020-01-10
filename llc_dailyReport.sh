@@ -303,6 +303,9 @@ else
     echo -e "Failed password login attempts($failedLogins) under limit"
 fi
 
+alarmMsg="INFO: Completed Daily Report Script - $(date '+%Y-%m-%d %H:%M:%S')"
+mail -s "$localHost: $alarmMsg" $alarmRecipentList < /dev/null >& /dev/null
+
 echo -e "\n**** $localHost : $(date '+%Y-%m-%d %H:%M:%S') - Completed llc_dailyReport.  ****"
 
 exit 0
