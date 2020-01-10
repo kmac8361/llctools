@@ -11,6 +11,16 @@ if (os.geteuid() != 0):
     print("ERROR: You need to have sudo root privileges to execute this script")
     exit(1)
 
+llcHostname = socket.gethostname()
+if (not llcHostname):
+    print("ERROR: Unable to get local LLC hostname.")
+    exit(1)
+
+#print("Local hostname: ",llcHostname)
+llcNumber = llcHostname[9:]
+#print("LLC Number: ",llcNumber)
+maasPwd = "maas" + llcNumber
+
 # Next verify command usage
 allNodePowerCycle = False
 printUsage = False
@@ -52,7 +62,7 @@ if (not localIP):
     
 client = login(
     "http://localhost:5240/MAAS/",
-    username="admin", password="admin",
+    username="admin", password=maasPwd,
 )
 
 # First pass we get names of all machines matching request
