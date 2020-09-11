@@ -138,48 +138,48 @@ if (powerCmd == "on") and maasVirshToCycle:
     for machine in client.machines.list():
         if (machine.hostname in maasVirshToCycle):
             print("INFO: Powering on local MaaS virsh machine: ", machine.hostname)
-            #machine.power_on()
+            machine.power_on()
     print("INFO: Sleeping 30 seconds to allow local MaaS virsh machines to startup...")
-    #time.sleep(30)
+    time.sleep(30)
 elif (powerCmd == "off") and virshMachinesToCycle:
     for machine in client.machines.list():
         if (machine.hostname in virshMachinesToCycle):
             print("INFO: Powering off remote virtual machine: ", machine.hostname)
-            #machine.power_off()
+            machine.power_off()
     print("INFO: Sleeping 15 seconds to allow remote virtual machines to power down...")
-    #time.sleep(15)
+    time.sleep(15)
 
 # Third pass. If target is ON state, do physical machines next.  If target is OFF, also do physical machines machines.
 if (powerCmd == "on") and physMachinesToCycle:
     for machine in client.machines.list():
         if (machine.hostname in physMachinesToCycle):
             print("INFO: Powering on physical machine: ", machine.hostname)
-            #machine.power_on()
+            machine.power_on()
     print("INFO: Sleeping 60 seconds to allow physical machines to startup...")
-    #time.sleep(60)
+    time.sleep(60)
 elif (powerCmd == "off") and physMachinesToCycle:
     for machine in client.machines.list():
         if (machine.hostname in physMachinesToCycle):
             print("INFO: Powering off physical machine: ", machine.hostname)
-            #machine.power_off()
+            machine.power_off()
     print("INFO: Sleeping 30 seconds to allow physical machines to power down...")
-    #time.sleep(30)
+    time.sleep(30)
 
 # Fourth pass. If target is ON state, do remote virtual machines next.  If target is OFF, do local MaaS virsh machines next..
 if (powerCmd == "on") and virshMachinesToCycle:
     for machine in client.machines.list():
         if (machine.hostname in virshMachinesToCycle):
             print("INFO: Powering on remote virtual machine: ", machine.hostname)
-            #machine.power_on()
+            machine.power_on()
     print("INFO: Sleeping 30 seconds to allow remote virtual machines to power on...")
-    #time.sleep(30)
+    time.sleep(30)
 elif (powerCmd == "off") and maasVirshToCycle:
     for machine in client.machines.list():
         if (machine.hostname in maasVirshToCycle):
             print("INFO: Powering off local MaaS virsh machine: ", machine.hostname)
-            #machine.power_off()
+            machine.power_off()
     print("INFO: Sleeping 15 seconds to allow local MaaS virsh machines to power down...")
-    #time.sleep(15)
+    time.sleep(15)
 
 # Last pass. Iterate over all machines involved in power cycle and query their power state.
 print("******************  Final PowerCycle State Results *********************")
